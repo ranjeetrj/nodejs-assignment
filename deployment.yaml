@@ -1,0 +1,30 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nodejs
+  labels:
+    component: nodejs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: "nodejs"
+  template:
+    metadata:
+      labels:
+        component: "nodejs"
+    spec:
+      containers:
+        - name: nodejs
+          image: "nodejs:latest"
+          ports:
+          - name: http
+            containerPort: 8080
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits: 
+              cpu: "100m"
+              memory: "256Mi"
